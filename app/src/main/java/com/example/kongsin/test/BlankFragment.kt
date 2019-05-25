@@ -1,6 +1,7 @@
 package com.example.kongsin.test
 
 import android.os.Bundle
+import android.os.Handler
 import android.support.design.widget.BottomSheetDialogFragment
 import android.view.*
 import android.widget.Toast
@@ -17,7 +18,10 @@ class BlankFragment : BottomSheetDialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        //Auto show keyboard
         edt.showKeyboard()
+
+        //Subscribe to keyboard show/hide event.
         edt.listenToKeboard(object : OnToggleKeyboardListener {
             override fun onKeyboardShow() {
                 Toast.makeText(context, "Show keyboard", Toast.LENGTH_SHORT).show()
@@ -28,6 +32,11 @@ class BlankFragment : BottomSheetDialogFragment() {
                 dismiss()
             }
         })
+
+        //Auto hide keyboard after 3 sec.
+        Handler().postDelayed({
+            edt.hideKeyboard()
+        }, 3000)
     }
 
     companion object {

@@ -63,6 +63,11 @@ class KEditText : AppCompatEditText, View.OnLayoutChangeListener {
         }
     }
 
+    fun hideKeyboard() {
+        val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.hideSoftInputFromWindow(this.windowToken, InputMethodManager.HIDE_IMPLICIT_ONLY)
+    }
+
 }
 
 interface OnToggleKeyboardListener {
